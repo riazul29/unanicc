@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+  <meta content="index, follow" name="robots"/>
+  <meta content="আপনার পণ্যের ইউনিক ল্যান্ডিং পেজ" name="description"/>
+  <title>unanicc</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* General Body and Container Styles */
+    body {
+      font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header Styles */
+    header {
+      background: white;
+      padding: 20px 10px;
+      color: #333;
+      text-align: center;
+    }
+    .header-logo img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      max-height: 150px;
+    }
+
+    /* Steps Template Styles */
+    .steps-template {
+      --steps-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --primary-text-color: #212529;
+      --secondary-text-color: #6c757d;
+      --accent-color: #0d6efd;
+      --line-color: #dee2e6;
+      --counter-bg-color: #fff;
+      --counter-text-color: var(--accent-color);
+      --counter-border-color: var(--accent-color);
+      --counter-size: 40px;
+      --line-width: 2px;
+      font-family: var(--steps-font-family);
+      color: var(--primary-text-color);
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .steps-template * , .steps-template *::before, .steps-template *::after {
+      box-sizing: border-box;
+    }
+    .steps-template .steps-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .steps-template .steps-header h2 {
+      font-size: 2.25rem;
+      margin: 0 0 0.5rem 0;
+    }
+    .steps-template .steps-list {
+      list-style: none;
+      padding-left: calc(var(--counter-size) + 20px);
+      margin: 0;
+      position: relative;
+      counter-reset: steps-counter;
+    }
+    .steps-template .steps-list::before {
+      content: '';
+      position: absolute;
+      left: calc(var(--counter-size) / 2);
+      top: 0;
+      bottom: 0;
+      width: var(--line-width);
+      background-color: var(--line-color);
+      transform: translateX(-50%);
+    }
+    .steps-template .steps-list-item {
+      position: relative;
+      padding-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .steps-template .steps-list-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .steps-template .steps-list-item:last-child {
+      padding-bottom: 0;
+    }
+    .steps-template .steps-list-item::before {
+      counter-increment: steps-counter;
+      content: counter(steps-counter);
+      position: absolute;
+      left: calc(-1 * (var(--counter-size) + 20px));
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--counter-size);
+      height: var(--counter-size);
+      border: var(--line-width) solid var(--counter-border-color);
+      border-radius: 50%;
+      background-color: var(--counter-bg-color);
+      color: var(--counter-text-color);
+      font-weight: bold;
+      font-size: 1rem;
+      opacity: 1;
+    }
+    .steps-template .steps-list-item h3 {
+      font-size: 1.25rem;
+      margin: 0 0 0.5rem 0;
+    }
+    .steps-template .steps-list-item p {
+      margin: 0;
+      color: var(--secondary-text-color);
+      line-height: 1.6;
+    }
+    @media screen and (max-width: 640px) {
+      .steps-template {
+        max-width: 100%;
+      }
+    }
+
+    /* Pricing Card Styles */
+    .pricing-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .pricing-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      width: 300px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+    }
+    .pricing-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    }
+    .image-slideshow {
+      position: relative;
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      text-align: center;
+    }
+    .image-slideshow img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .lazyYt {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .lazyYt img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .lazyYt .play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      transition: background 0.3s ease;
+    }
+    .lazyYt .play:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+    .lazyYt svg {
+      width: 40px;
+      height: 40px;
+      fill: white;
+    }
+    .pricing-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .product-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1b5e20;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .description-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      padding: 6px;
+      margin-bottom: 12px;
+      color: #006400;
+      font-weight: 500;
+      user-select: none;
+    }
+    .toggle-arrow {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid #006400;
+      margin-left: 8px;
+      transition: transform 0.4s ease;
+    }
+    .description-toggle.open .toggle-arrow {
+      transform: rotate(180deg);
+    }
+    .description-wrapper {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-in-out;
+    }
+    .product-description {
+      color: #555;
+      font-size: 14px;
+      line-height: 1.6;
+      text-align: center;
+      padding-bottom: 15px;
+    }
+    .price-tag {
+      background: #e8f5e9;
+      font-size: 22px;
+      font-weight: 700;
+      padding: 10px;
+      text-align: center;
+      border-radius: 6px;
+      margin-bottom: 15px;
+    }
+    .price-tag del {
+      color: #d32f2f;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+    .price-tag ins {
+      color: #006400;
+      text-decoration: none;
+    }
+    .features-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+    .features-list li {
+      padding: 8px 0 8px 28px;
+      color: #333;
+      position: relative;
+      line-height: 1.5;
+    }
+    .features-list li:before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      color: #2e7d32;
+    }
+    .order-btn, .zbutton {
+      display: inline-block;
+      text-align: center;
+      background: linear-gradient(90deg, #28a745, #00e936);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: auto;
+    }
+    .order-btn:hover, .zbutton:hover {
+      background: linear-gradient(90deg, #00a63e, #004d00);
+    }
+    @media (max-width: 768px) {
+      .pricing-card {
+        width: 100%;
+        max-width: 350px;
+      }
+    }
+
+    /* Order Form Styles */
+    .form-wrapper {
+      max-width: 600px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+      margin-top: 40px;
+    }
+    .form-wrapper h2 {
+      text-align: center;
+      color: #000000;
+      margin-bottom: 50px;
+    }
+    .cod-note {
+      background-color: rgba(63, 63, 63, 0.05);
+      color: hsl(0, 100%, 50%);
+      padding: 15px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 600;
+      margin-top: 30px;
+      margin-bottom: 50px;
+    }
+    .cod-noti {
+      background-color: rgba(0, 0, 0, 0.05);
+      color: #a2a2a2;
+      padding: 25px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 600;
+      margin-top: 40px;
+    }
+    .product-box {
+      border: 1px solid #2baf24;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 15px;
+      background: #d4fad1e7;
+    }
+    .product-box label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      gap: 10px;
+    }
+    .product-box input[type="radio"] {
+      transform: scale(1.3);
+    }
+    .quantity-input {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    .quantity-input input {
+      width: 40px;
+      border-radius: 8px;
+      padding: 5px;
+      border: 2px solid #ccc;
+      text-align: center;
+    }
+    .form-group {
+      position: relative;
+      margin-bottom: 22px;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 14px 10px;
+      border: 2px solid #000000 !important;
+      border-radius: 10px !important;
+      font-size: 15px;
+      outline: none;
+      background: white !important;
+      box-sizing: border-box;
+    }
+    .form-group textarea {
+      resize: vertical;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: #005eff !important;
+    }
+    .form-group label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 15px;
+      color: #000000;
+      background: white;
+      padding: 0 6px;
+      transition: 0.2s ease;
+      pointer-events: none;
+    }
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label,
+    .form-group textarea:focus + label,
+    .form-group textarea:not(:placeholder-shown) + label {
+      top: -10px;
+      left: 10px;
+      font-size: 12px;
+      color: #0666ff;
+    }
+    #totalPrice {
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: #0d8713;
+      margin-top: 15px;
+    }
+    .form-wrapper button {
+      width: 100%;
+      background: #2d6a4f;
+      color: white;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.1s ease;
+    }
+    .form-wrapper button:hover {
+      background: #22543d;
+      transform: scale(1.02);
+    }
+    #loading {
+      display: none;
+      text-align: center;
+      font-weight: bold;
+      color: #1b4332;
+      font-size: 16px;
+      margin-top: 15px;
+    }
+    #thankyou-message {
+      display: none;
+    }
+    .thank-container {
+      max-width: 550px;
+      margin: 50px auto;
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 35px 25px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      border: 1px solid #b0e0a1;
+    }
+    .success-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 20px;
+    }
+    .main-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #10c81c;
+      margin-bottom: 12px;
+    }
+    .details {
+      font-size: 16px;
+      background: #e1f8e1;
+      padding: 16px;
+      border-radius: 10px;
+      margin: 12px 0;
+      line-height: 1.8;
+      color: #3a3a3a;
+      border-left: 4px solid #09f018;
+    }
+    .footer-note {
+      font-size: 16px;
+      color: #0d0d0d;
+      margin-top: 25px;
+      font-weight: bold;
+    }
+    @media (max-width: 600px) {
+      .thank-container {
+        width: 90%;
+        padding: 25px 15px;
+      }
+      .main-title { font-size: 22px; }
+      .details, .footer-note { font-size: 15px; }
+    }
+
+    /* Footer Styles */
+    .footer {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      background-color: black;
+      padding: 20px 10px;
+      color: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .footer .footer-left, .footer .footer-right {
+      flex: 1 1 300px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .footer a {
+      color: #28a745;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    @media only screen and (max-width: 768px) {
+      .footer {
+        flex-direction: column;
+      }
+      .footer .footer-left, .footer .footer-right {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-logo">
+      <a href="#">
+        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjG05bf1iCv49T6-AfvpAga62-uZT8bTcid0FArPD8AE_ELVj49psjK5BXKYWbm2wuB3nbiHm8YGqjwsHnI2wiRP36irUm5reCU1wfvXj1I-zUE8Q62DkopBL5Xx8uqehhyg12pdQd5GRoxWDTRenwOWeIW19a2TNm_d0oSEgpAG20Bjq1kmcf4NNtCwQQM=s600" alt="unanicikithsacenterbd Header" />
+      </a>
+    </div>
+  </header>
+
+  <div class="container">
+    <main>
+        <div class="steps-template">
+            <ol class="steps-list">
+                <li class="steps-list-item">
+                    <h5>আপনি এই ১ মাসের কোর্সটি কেন খাবেন? Why?</h5>
+                    <p>এই ১ মাসের কোর্সটিতে রয়েছে ৫টি ন্যাচারাল ঔষধ, যা একদম ন্যাচারাল, কোনো ক্ষতি করে না। বিবাহেরের পূর্বে বা পরে হ_স্ত_মৈ_থু_ন করে যে ক্ষতিগুলো করেছেন আপনার ঐ বিশেষ অঙ্গের, তা ঠিক করতে চাইলে এই কোর্স আপনার জন্য। বিবাহিত জীবন তৃপ্তিময় করতে এবং দীর্ঘসময় টিকে থাকতে চাইলে আর যৌবনের পরিপূর্ণ তারুণ্য রস ফিরে পেতে চাইলে এই কোর্স আপনার জন্য। যদি করার পর শরীর দুর্বল লাগে। যদি করার সময় বেশিখন টিকতে না পারেন। যদি পানি পাতলা, অল্প, বা দ্রুত বের হয়ে যায়। যদি করার ইচ্ছা কমে গিয়ে থাকে। যদি বিয়ের আগে বা পরে হ_স্ত_মৈ_থু_ন করে থাকেন। যদি করার সময় লি_ঙ্গ_ ঢিলে হয়ে পড়ে। আপনার কী এই সমস্যাগুলোর কোনোটি আছে❓ তাহলে এই কোর্স আপনার জন্য!</p>
+                </li>
+                <li class="steps-list-item">
+                    <h3>করার সময় বৃদ্ধি করবে</h3>
+                    <p>লি_ঙ্গ_দীর্ঘ সময় শক্ত থাকবে, দীর্ঘ সময় টিকে থাকতে সাহায্য করবে। দীর্ঘ সময় লি_ঙ্গ_শক্ত রেখে মি_ল_ন সফল করতে সাহায্য করবে।</p>
+                </li>
+                <li class="steps-list-item">
+                    <h3>পানি গাঢ় করবে</h3>
+                    <p>দ্রুত পানি বের হওয়া বন্ধ করবে।</p>
+                </li>
+                <li class="steps-list-item">
+                    <h3>লি_ঙ্গ_ শক্ত এবং মজবুত করবে</h3>
+                    <p>হ_স্ত_মৈ_থ_নে_র কারণে লি_ঙ্গে_র রগ ও নিউরনগুলোতে যদি কোন সমস্যা হয়ে থাকে তাহলে তা ঠিক করে দিবে।</p>
+                </li>
+                <li class="steps-list-item">
+                    <h3>বিশেষ উপকারিতা</h3>
+                    <p>শরীরের ভিতর থেকে শক্তি জাগিয়ে তোলে, করার আকাঙ্ক্ষা বাড়িয়ে তোলবে।</p>
+                </li>
+                <li class="steps-list-item">
+                    <h3>হ_স্ত_মৈ_থু_নে_র ঘাটতি পূরণ করবে</h3>
+                    <p>হ_স্ত_মৈ_থু_নে_র পর শরীরের যতকিছু নষ্ট হয়েছে সব ঘাটতি পূরণ করে সক্ষমতা বাড়াবে।</p>
+                </li>
+            </ol>
+        </div>
+
+        <div class="pricing-card" style="margin-left: auto; margin-right: auto; margin-top: 30px; margin-bottom: 30px;">
+            <div class="image-slideshow">
+               <div class="lazyYt" data-embed="fWPuwga9LGk">
+                <div class="play">
+                  <svg viewbox="0 0 213.7 213.7"><polygon class="t" points="73.5,62.5 148.5,105.8 73.5,149.1"></polygon></svg>
+                </div>
+                <img src="https://i.ytimg.com/vi/fWPuwga9LGk/hqdefault.jpg" alt="Youtube video" />
+              </div>
+            </div>
+            <div class="pricing-content">
+              <h5 class="product-title">এই কোর্সটি তাদের জন্যও যারা হ_স্ত_মৈ_থু_নে ক্লান্ত হয়ে পড়েছেন! যৌ_ব_ন শেষ করে ফেলেছেন!</h5>
+              <div class="description-toggle"><span>বিস্তারিত দেখুন</span><span class="toggle-arrow"></span></div>
+              <div class="description-wrapper">
+                <p class="product-description"><strong>হ_স্ত_মৈ_থু_ন করে যে ক্ষতি হয়েছে তা থেকে পুনরুদ্ধার সম্ভব? হ্যা। </strong> শক্তি হারিয়ে মন ও দেহে দুর্বলতা অনুভব করছেন? নিয়মিত প্রাকৃতিক ইউনানী ওষুধ সেবনের মাধ্যমে শরীর ও মন দুইই ফিরে পেতে পারে তার প্রকৃত শক্তি ও সুস্থতা। আমরা আপনাকে দিচ্ছি নির্ভরযোগ্যভাবে নিরাপদ ও প্রাকৃতিক সমাধান। যা প্রাকৃতিক ইউনানী চিকিৎসার মাধ্যমে আপনি ফিরে পেতে পারেন আগের মতো প্রাণশক্তি ও আত্মবিশ্বাস। কোনো পা_র্শ্ব_প্র_তি_ক্রি_য়া ছাড়াই শ_ত_ভা_গ ন্যাচারাল চিকিৎসা। যা অসংখ্য অগনিত রোগীর জীবনে এনেছে ইতিবাচক পরিবর্তন।</p>
+              </div>
+              <p style="text-align: center;">
+                <a href="#orderForm" class="zbutton Gu">এখন অর্ডার করুন</a>
+              </p>
+            </div>
+        </div>
+
+      <div class="pricing-container">
+        <div class="pricing-card">
+          <div class="image-slideshow">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgaIvK8-baisZXnWUsxOjoJwzgr65oBgFZbGvarQikv40u84nsguronYkn5wELyEOs6QNHm99uL1gau5rrT9rfcHRFtyW3sGwFWdIl-efhzENJRJ9Bz93mXahTcsCawQft7o2WizRI35_RO1uCWhaFqyh1Bn4GuT5zYL44HdXF830z2gmcYhF14_kjs/w400-h266/Ad%20poster%20(2).jpg" alt="Unani Cikithsa Center" />
+          </div>
+          <div class="pricing-content">
+            <h3 class="product-title">৩০ ‍দিনের কোর্স</h3>
+            <div class="description-toggle">
+              <span>বিস্তারিত দেখুন</span>
+              <span class="toggle-arrow"></span>
+            </div>
+            <div class="description-wrapper">
+              <p class="product-description">
+                আমরা ৫০ বছর ধরে অসংখ্য অগণিত রোগীকে ঔষধ দিয়ে আসছি, আমাদের ইউনানী চিকিৎসা সেন্টার প্রতিষ্ঠিত হয়েছে ৩৫ বছর হয়। এই ৩৫ বছরের অভিজ্ঞতা থেকেই উন্নতমানের ন্যাচারাল ফর্মুলায় তৈরি এই পাঁচটি ন্যাচারাল ঔষধ রেডি করেছি। মাত্র কিছুদিন সেবন করলেই বদলে যাবে আপনার আত্মবিশ্বাস! সম্পূর্ণ প্রাকৃতিক এই দাম্পত্য শক্তিবর্ধক কোর্স আপনাকে ফিরিয়ে দেবে পুরুষত্বের আসল শক্তি- কোনো ক্ষতি ছাড়াই।
+              </p>
+              <h4 style="color:#d63384; margin-top:15px;">খাওয়ার নিয়ম কিভাবে জানবো? </h4>
+              <ul style="padding-left:20px; margin-top:5px; margin-bottom:10px; color:#333; font-weight:100;">
+                <li>এই পাচটি ঔষধের মধ্যে চারটি ঔষধ কিভাবে খাবেন এবং মালিশটি কিভাবে ব্যবহার করবেন আমারা তা প্রেসক্রিপশনে বিস্তারিত লিখে ঔষধের সাথে দিয়ে দিবো।</li>
+              </ul>
+            </div>
+            <div class="price-tag"><del>৳ ২০০০</del> <ins>৳ ১২৯০</ins></div>
+            <ul class="features-list">
+              <li>কোর্সটিতে রয়েছে ৫টি ঔষধ</li>
+              <li>৩টি ট্যাবলেট জাতীয় ঔষধ</li>
+              <li>১টি পাউডার </li>
+              <li>১টি মালিশ</li>
+            </ul>
+            <a href="#orderForm" class="order-btn">এখন অর্ডার করুন</a>
+          </div>
+        </div>
+        <div class="pricing-card">
+          <div class="image-slideshow">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiSLjZ4lMOMQBgv35v15ImwwHyS-RIPvUNSh1PIiB35Y3sZFKkNIPG3fGQOcnDxdNdSeHj-7m3xc8iKBqpJIjNfyLg8M7eYV4_5VWhbBDUZOK4vFyiSZhA2OGxPengnwbixqeCPpQ_sxZvl_rRoxsY51nY6a3RQPt10iZ7j6B9AA3iNJp4QthNp86cv/w400-h266/Ad%20poster.jpg" alt="Anti Stretch Mark Cream" />
+          </div>
+          <div class="pricing-content">
+            <h3 class="product-title">৩০ ট্যাবলেট</h3>
+            <div class="description-toggle">
+              <span>বিস্তারিত দেখুন</span>
+              <span class="toggle-arrow"></span>
+            </div>
+            <div class="description-wrapper">
+              <p class="product-description">
+                প্রাকৃতিক উপাদানে তৈরি একটি নিরাপদ ও কার্যকর দাম্পত্য শক্তিবর্ধক, যা পুরুষদের প্রাণবন্ততা ও আত্মবিশ্বাস পুনরুদ্ধারে সহায়ক। শরীরের ভিতর থেকে শক্তি জাগিয়ে তোলে এই প্রাকৃতিক ট্যাবলেটগুলো। নিয়মিত সেবনে মেলে তৃপ্তিদায়ক মিলন ও দীর্ঘস্থায়ী শক্তি।
+              </p>
+            </div>
+            <div class="price-tag"><del>৳১০০০</del> <ins>৳ ৭০০</ins></div>
+            <ul class="features-list">
+              <li>পিউর প্রাকৃতিক উপাদান</li>
+              <li>দ্রুত ফলাফল</li>
+              <li>৩০ ট্যাবলেট</li>
+              <li>৩০-৪০ ‍দিন চলবে</li>
+            </ul>
+            <a href="#orderForm" class="order-btn">অর্ডার করুন</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-section" id="orderForm">
+        <div class="form-wrapper">
+          <form id="actualOrderForm">
+            <div class="cod-note">🚚 ডেলিভারি চার্জ ফ্রি!</div>
+            <h2>অর্ডার করতে নিচের ফর্মটি পূরণ করুন</h2>
+            <div class="form-group">
+              <input type="text" name="name" required placeholder=" " />
+              <label>আপনার নাম লিখুন </label>
+            </div>
+            <div class="form-group">
+              <input type="text" name="phone" required placeholder=" " />
+              <label>আপনার নাম্বার লিখুন</label>
+            </div>
+            <div class="form-group">
+              <textarea name="address" rows="3" required placeholder=" "></textarea>
+              <label>আপনার সম্পূর্ণ ঠিকানা লিখুন</label>
+            </div>
+            <div class="product-box">
+              <label>
+                <input type="radio" name="product" value="৩০ দিনের কোর্স (১২৯০)" checked onchange="calculateTotal()" />
+                ৩০ দিনের কোর্স (১২৯০ ৳)
+              </label>
+            </div>
+            <div class="product-box">
+              <label>
+                <input type="radio" name="product" value="৩০ ট্যাবলেট (৭০০)" onchange="calculateTotal()" />
+                ৩০ ট্যাবলেট (৭০০ ৳)
+              </label>
+            </div>
+            <div class="quantity-input">
+              <span>পরিমাণঃ</span>
+              <input type="number" name="quantity" value="1" min="1" oninput="calculateTotal()" />
+            </div>
+            <div id="totalPrice">মোট মূল্য: <strong>1290</strong> ৳</div>
+            <div class="cod-noti">Cash On Delivery</div>
+            <button type="submit">অর্ডার কনফার্ম করুন</button>
+          </form>
+          <div id="loading"> Please Wait... </div>
+          <div id="thankyou-message">
+              <div class="thank-container">
+                  <svg class="success-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path fill="#00c853" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.707 9.293l-7.414 7.414a1 1 0 01-1.414 0l-3.707-3.707a1 1 0 111.414-1.414l3 3 6.707-6.707a1 1 0 111.414 1.414z"/>
+                  </svg>
+                  <div class="main-title"> ধন্যবাদ! আপনার অর্ডারটি আমরা পেয়েছি। </div>
+                  <div class="details">
+                      <p><strong> ডেলিভারি চার্জ:</strong> ফ্রি!!</p>
+                      <p> আমাদের কাস্টমার প্রতিনিধি আপনাকে খুব শীঘ্রই কল করবেন, রি-কনফার্ম করার জন্য。<br /> কলটি রিসিভ করার জন্য বিনীত অনুরোধ রইলো। <br /> Phone : 01740743157 </p>
+                  </div>
+                  <div class="footer-note">
+                      ধন্যবাদান্তে,<br />
+                      ইউনানী চিকিৎসা সেন্টার
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <p> Copyright © 2025 All Right Reserved -</p>
+        </div>
+        <div class="footer-right">
+             <p>Designed by <a href='https://riazulinfo.blogspot.com/' target='_blank'>Riazul Islam</a></p>
+        </div>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Scroll-triggered animation for list items
+      const items = document.querySelectorAll('.steps-list-item');
+      function isInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (rect.top <= (window.innerHeight || document.documentElement.clientHeight) - 50);
+      }
+      function checkVisibility() {
+        items.forEach(item => {
+          if (isInViewport(item)) {
+            item.classList.add('visible');
+          }
+        });
+      }
+      window.addEventListener('scroll', checkVisibility);
+      checkVisibility(); // Initial check
+
+      // Description toggle
+      const toggles = document.querySelectorAll('.description-toggle');
+      toggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+          const wrapper = toggle.nextElementSibling;
+          toggle.classList.toggle('open');
+          if (wrapper.style.maxHeight && wrapper.style.maxHeight !== "0px") {
+            wrapper.style.maxHeight = "0";
+          } else {
+            wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+          }
+        });
+      });
+
+      // Lazy load YouTube video
+      document.querySelectorAll('.lazyYt').forEach(function (yt) {
+        yt.addEventListener('click', function () {
+          const videoId = yt.dataset.embed;
+          if (!videoId) return;
+          const iframe = document.createElement('iframe');
+          iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1`);
+          iframe.setAttribute('frameborder', '0');
+          iframe.setAttribute('allowfullscreen', '1');
+          iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+          iframe.style.width = "100%";
+          iframe.style.height = "100%";
+          iframe.style.position = 'absolute';
+          iframe.style.top = '0';
+          iframe.style.left = '0';
+          // Make parent relative to position iframe correctly
+          yt.style.position = 'relative';
+          yt.style.paddingBottom = '56.25%'; // 16:9 aspect ratio
+          yt.innerHTML = '';
+          yt.appendChild(iframe);
+        });
+      });
+
+      // Order Form Submission
+      const scriptURL = "https://script.google.com/macros/s/AKfycbyGGwbkMMoQS1N5jaWKMQbTpg-6M-tOoz7Ouj7-bySHpqpFgkitP37pFHmaNqIfGD0T/exec";
+      const form = document.getElementById("actualOrderForm");
+      const thankyou = document.getElementById("thankyou-message");
+      const loading = document.getElementById("loading");
+
+      form.addEventListener("submit", e => {
+        e.preventDefault();
+        loading.style.display = "block";
+        const formData = new FormData(form);
+        fetch(scriptURL, { method: "POST", body: formData })
+          .then(response => {
+            loading.style.display = "none";
+            form.style.display = "none";
+            thankyou.style.display = "block";
+          })
+          .catch(error => {
+            loading.style.display = "none";
+            alert("❌ সমস্যা হয়েছে, আবার চেষ্টা করুন");
+            console.error('Error!', error.message);
+          });
+      });
+    });
+
+    function convertBanglaToEnglish(str) {
+        const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+        const englishDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        let newStr = str;
+        for (let i = 0; i < banglaDigits.length; i++) {
+            newStr = newStr.replace(new RegExp(banglaDigits[i], "g"), englishDigits[i]);
+        }
+        return newStr;
+    }
+
+    function calculateTotal() {
+        const product = document.querySelector('input[name="product"]:checked');
+        const quantityInput = document.querySelector('input[name="quantity"]');
+        const quantity = parseInt(quantityInput.value) || 1;
+
+        const productValue = convertBanglaToEnglish(product.value);
+        const priceMatch = productValue.match(/\d+/g);
+        const price = priceMatch ? parseInt(priceMatch[priceMatch.length - 1]) : 0;
+
+        const total = price * quantity;
+        document.getElementById("totalPrice").innerHTML = `মোট মূল্য: <strong>${total}</strong> ৳`;
+    }
+  </script>
+</body>
+</html>
